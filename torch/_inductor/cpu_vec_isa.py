@@ -364,7 +364,15 @@ def x86_isa_checker() -> List[str]:
 
 
 invalid_vec_isa = InvalidVecISA()
-supported_vec_isa_list = [VecAMX(), VecAVX512(), VecAVX2(), VecNEON(), VecSVE128(), VecSVE256(), VecSVE512()]
+supported_vec_isa_list = [
+    VecAMX(),
+    VecAVX512(),
+    VecAVX2(),
+    VecNEON(),
+    VecSVE128(),
+    VecSVE256(),
+    VecSVE512(),
+]
 
 
 def get_isa_from_cpu_capability(
@@ -436,7 +444,9 @@ def valid_vec_isa_list() -> List[VecISA]:
                     isa_list.append(VecSVE512())
                 else:
                     # Handle unexpected SVE vector lengths explicitly
-                    print(f"Warning: Unsupported SVE vector length {sve_vl}. Falling back to NEON.")
+                    print(
+                        f"Warning: Unsupported SVE vector length {sve_vl}. Falling back to NEON."
+                    )
                     isa_list.append(VecNEON())
             else:
                 isa_list.append(VecNEON())
